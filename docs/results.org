@@ -1,0 +1,626 @@
+* Initial datasets
+:PROPERTIES:
+:CUSTOM_ID: initial-datasets
+:END:
+The datasets considered for this study were the samples of UN General
+Assembly voting records for periods 1965-1980 and 2007-2023. The former
+is largely used as validation tool because it has historically studied
+voting blocs we can validate our results on.
+
+* Overall evaluation strategy
+:PROPERTIES:
+:CUSTOM_ID: overall-evaluation-strategy
+:END:
+We shall evaluate our model by comparing the original voting graph we
+produce on the stage of scrubbing information and initial statistics,
+with the post-processed graph that has edges within identified blocs
+removed.
+
+To that, we shall use the period of 1965-1980 to fine-tune resolution on
+greedy modularity optimizing algorithm present in networkx by choosing
+resolution low enough to ensure that there is at most difference of 1 in
+detected communities between provided graphs. It will be stated as a
+fact that at higher resolutions, amount of communities (single node
+ones) detected in raw graph is significantly higher.
+
+* Results as is
+:PROPERTIES:
+:CUSTOM_ID: results-as-is
+:END:
+** Cold war period
+:PROPERTIES:
+:CUSTOM_ID: cold-war-period
+:END:
+After choosing a resolution of 1.55 for the algorithm we get the
+following divergence in communities in Cold War.
+
+| Processed graph.                         | Raw graph                      |
+|------------------------------------------+--------------------------------|
+| Community                              1 |                                |
+|------------------------------------------+--------------------------------|
+| AFGHANISTAN                              | AFGHANISTAN                    |
+| ALBANIA                                  | ALBANIA                        |
+| ALGERIA                                  | ALGERIA                        |
+| BULGARIA                                 | BULGARIA                       |
+| BURUNDI                                  | BURUNDI                        |
+| BYELORUSSIAN SSR                         | BYELORUSSIAN SSR               |
+| CAMBODIA                                 | CAMBODIA                       |
+| SRI LANKA                                | SRI LANKA                      |
+| CHINA                                    | CHINA                          |
+| CONGO                                    | CONGO                          |
+| CUBA                                     | CUBA                           |
+| CYPRUS                                   | CYPRUS                         |
+| CZECHOSLOVAKIA                           | CZECHOSLOVAKIA                 |
+| BERIN                                    | BERIN                          |
+| ETHIOPIA                                 | ETHIOPIA                       |
+| GUINEA                                   | GUINEA                         |
+| HUNGARY                                  | HUNGARY                        |
+| INDIA                                    | INDIA                          |
+| IRAQ                                     | IRAQ                           |
+| JORDAN                                   | JORDAN                         |
+| KENYA                                    | KENYA                          |
+| KUWAIT                                   | KUWAIT                         |
+| LEBANON                                  | LEBANON                        |
+| LIBYA                                    | LIBYA                          |
+| MALDIVE ISLANDS                          | MALDIVE ISLANDS                |
+| MALI                                     | MALI                           |
+| MAURITANIA                               | MAURITANIA                     |
+| MONGOLIA                                 | MONGOLIA                       |
+| MOROCCO                                  | MOROCCO                        |
+| NIGERIA                                  | NIGERIA                        |
+| PAKISTAN                                 | PAKISTAN                       |
+| POLAND                                   | POLAND                         |
+| ROMANIA                                  | ROMANIA                        |
+| SAUDI ARABIA                             | SAUDI ARABIA                   |
+| SENEGAL                                  | SENEGAL                        |
+| SOMALIA                                  | SOMALIA                        |
+| SUDAN                                    | SUDAN                          |
+| SYRIA                                    | SYRIA                          |
+| TUNISIA                                  | TUNISIA                        |
+| UGANDA                                   | UGANDA                         |
+| UKRAINIAN SSR                            | UKRAINIAN SSR                  |
+| USSR                                     | USSR                           |
+| EGYPT                                    | EGYPT                          |
+| UNITED REPUBLIC OF TANZANIA              | UNITED REPUBLIC OF TANZANIA    |
+| YEMEN                                    | YEMEN                          |
+| YUGOSLAVIA                               | YUGOSLAVIA                     |
+| ZAMBIA                                   | ZAMBIA                         |
+| SOUTHERN YEMEN                           | SOUTHERN YEMEN                 |
+| EQUATORIAL GUINEA                        | EQUATORIAL GUINEA              |
+| GERMAN DEMOCRATIC REPUBLIC               | GERMAN DEMOCRATIC REPUBLIC     |
+|------------------------------------------+--------------------------------|
+| Community                              2 |                                |
+|------------------------------------------+--------------------------------|
+| ARGENTINA                                | ARGENTINA                      |
+| AUSTRALIA                                | AUSTRALIA                      |
+| AUSTRIA                                  | AUSTRIA                        |
+| BELGIUM                                  | BELGIUM                        |
+| BOLIVIA                                  | BOLIVIA                        |
+| BRAZIL                                   | BRAZIL                         |
+| CANADA                                   | CANADA                         |
+| CHILE                                    | CHILE                          |
+| COLOMBIA                                 | COLOMBIA                       |
+| COSTA RICA                               | COSTA RICA                     |
+| DENMARK                                  | DENMARK                        |
+| DOMINICAN REPUBLIC                       | DOMINICAN REPUBLIC             |
+| EL SALVADOR                              | EL SALVADOR                    |
+| FINLAND                                  | FINLAND                        |
+| FRANCE                                   | FRANCE                         |
+| GREECE                                   | GREECE                         |
+| GUATEMALA                                | GUATEMALA                      |
+| HAITI                                    | HAITI                          |
+| HONDURAS                                 | HONDURAS                       |
+| ICELAND                                  | ICELAND                        |
+| IRELAND                                  | IRELAND                        |
+| ISRAEL                                   | ISRAEL                         |
+| ITALY                                    | ITALY                          |
+| IVORY COAST                              | IVORY COAST                    |
+| JAPAN                                    | JAPAN                          |
+| LIBERIA                                  | LIBERIA                        |
+| LUXEMBOURG                               | LUXEMBOURG                     |
+| MALAWI                                   | MALAWI                         |
+| MEXICO                                   | MEXICO                         |
+| NETHERLANDS                              | NETHERLANDS                    |
+| NEW ZEALAND                              | NEW ZEALAND                    |
+| NICARAGUA                                | NICARAGUA                      |
+| NORWAY                                   | NORWAY                         |
+| PANAMA                                   | PANAMA                         |
+| PARAGUAY                                 | PARAGUAY                       |
+| PHILIPPINES                              | PHILIPPINES                    |
+| PORTUGAL                                 | PORTUGAL                       |
+| SOUTH AFRICA                             | SOUTH AFRICA                   |
+| SPAIN                                    | SPAIN                          |
+| SWEDEN                                   | SWEDEN                         |
+| THAILAND                                 | THAILAND                       |
+| TURKEY                                   | TURKEY                         |
+| UNITED KINGDOM                           | UNITED KINGDOM                 |
+| UNITED STATES                            | UNITED STATES                  |
+| URUGUAY                                  | URUGUAY                        |
+| VENEZUELA                                | VENEZUELA                      |
+| ESWATINI                                 | ESWATINI                       |
+| GERMANY, FEDERAL REPUBLIC OF             | GERMANY, FEDERAL REPUBLIC OF   |
+| SOLOMON ISLANDS                          | SOLOMON ISLANDS                |
+|------------------------------------------+--------------------------------|
+| Community                              3 |                                |
+|------------------------------------------+--------------------------------|
+| GAMBIA                                   | GAMBIA                         |
+| MALTA                                    | MALTA                          |
+| BOTSWANA                                 | BOTSWANA                       |
+| LESOTHO                                  | LESOTHO                        |
+| MALDIVES                                 | MALDIVES                       |
+| MAURITIUS                                | MAURITIUS                      |
+|                                          | *FIJI*                         |
+| BAHRAIN                                  | BAHRAIN                        |
+| BHUTAN                                   | BHUTAN                         |
+| OMAN                                     | OMAN                           |
+| QATAR                                    | QATAR                          |
+| UNITED ARAB EMIRATES                     | UNITED ARAB EMIRATES           |
+| BAHAMAS                                  | BAHAMAS                        |
+| BANGLADESH                               | BANGLADESH                     |
+| GRENADA                                  | GRENADA                        |
+| GUINEA-BISSAU                            | GUINEA-BISSAU                  |
+| BENIN                                    | BENIN                          |
+| CABO VERDE                               | CABO VERDE                     |
+| COMOROS                                  | COMOROS                        |
+| MOZAMBIQUE                               | MOZAMBIQUE                     |
+| PAPUA NEW GUINEA                         | PAPUA NEW GUINEA               |
+| SAO TOME AND PRINCIPE                    | SAO TOME AND PRINCIPE          |
+| SURINAME                                 | SURINAME                       |
+| ANGOLA                                   | ANGOLA                         |
+| SAMOA                                    | SAMOA                          |
+| SEYCHELLES                               | SEYCHELLES                     |
+| DJIBOUTI                                 | DJIBOUTI                       |
+| VIET NAM                                 | VIET NAM                       |
+| SAINT LUCIA                              | SAINT LUCIA                    |
+|------------------------------------------+--------------------------------|
+| Community                              4 |                                |
+|------------------------------------------+--------------------------------|
+|                                          | *CAMEROON*                     |
+| CENTRAL AFRICAN REPUBLIC                 | CENTRAL AFRICAN REPUBLIC       |
+| CHAD                                     | CHAD                           |
+| GABON                                    | GABON                          |
+| *JAMAICA*                                |                                |
+| *MADAGASCAR*                             |                                |
+| NIGER                                    | NIGER                          |
+| RWANDA                                   | RWANDA                         |
+| SIERRA LEONE                             | SIERRA LEONE                   |
+| TOGO                                     | TOGO                           |
+| UPPER VOLTA                              | UPPER VOLTA                    |
+|------------------------------------------+--------------------------------|
+| Community                              5 |                                |
+|------------------------------------------+--------------------------------|
+|                                          | *JAMAICA*                      |
+|                                          | *LAOS*                         |
+|                                          | *MADAGASCAR*                   |
+| TRINIDAD AND TOBAGO                      | TRINIDAD AND TOBAGO            |
+| *BARBADOS*                               |                                |
+| GUYANA                                   | GUYANA                         |
+| *FIJI*                                   |                                |
+|------------------------------------------+--------------------------------|
+| Community                              6 |                                |
+|------------------------------------------+--------------------------------|
+| CONGO (DEMOCRATIC REPUBLIC OF)           | CONGO (DEMOCRATIC REPUBLIC OF) |
+| IRAN                                     | IRAN                           |
+| MALAYSIA                                 | MALAYSIA                       |
+|                                          | *INDONESIA*                    |
+|------------------------------------------+--------------------------------|
+| Community                              7 |                                |
+|------------------------------------------+--------------------------------|
+| BURMA                                    | BURMA                          |
+| NEPAL                                    | NEPAL                          |
+| SINGAPORE                                | SINGAPORE                      |
+|------------------------------------------+--------------------------------|
+| Community                              8 |                                |
+|------------------------------------------+--------------------------------|
+| PERU                                     | PERU                           |
+|                                          | *BARBADOS*                     |
+|------------------------------------------+--------------------------------|
+| Community                              9 |                                |
+|------------------------------------------+--------------------------------|
+| *CAMEROON*                               |                                |
+| GHANA                                    | GHANA                          |
+
+These results might be fairly straightforward because this period is
+characterized by fairly rigid political structure of the world, freed
+colonies and other places buried in civil wars notwithstanding. Albeit,
+our approach does allow one to reshuffle communities, the notable of
+which is separation of Malysia from Indonesia.
+
+#+caption: The processed view of the graph
+[[./images/coldwar_filter_5_1.png]]
+
+#+caption: Image of the raw graph
+[[./images/coldwar_raw_1.png]]
+
+** Modern period
+:PROPERTIES:
+:CUSTOM_ID: modern-period
+:END:
+At last, using the similar strategy and applying it to modern period
+data (resolution chosen is 1.6)
+
+| Processed graph                          | Raw graph                                 |
+|------------------------------------------+-------------------------------------------|
+| Community 1                              |                                           |
+|------------------------------------------+-------------------------------------------|
+| *AFGHANISTAN*                            |                                           |
+| *ALGERIA*                                |                                           |
+| *ANGOLA*                                 |                                           |
+|                                          | *ANTIGUA AND BARBUDA*                     |
+| *AZERBAIJAN*                             |                                           |
+|                                          | *BAHAMAS*                                 |
+| *BAHRAIN*                                |                                           |
+| *BANGLADESH*                             |                                           |
+|                                          | *BARBADOS*                                |
+|                                          | *BELIZE*                                  |
+|                                          | *BENIN*                                   |
+| BHUTAN                                   | BHUTAN                                    |
+| *BOLIVIA*                                |                                           |
+|                                          | *BOTSWANA*                                |
+| *BRUNEI DARUSSALAM*                      |                                           |
+|                                          | *BURKINA FASO*                            |
+| BURUNDI                                  | BURUNDI                                   |
+| *CAMBODIA*                               |                                           |
+|                                          | *CAMEROON*                                |
+|                                          | *CABO VERDE*                              |
+|                                          | *CENTRAL AFRICAN REPUBLIC*                |
+| CHAD                                     | CHAD                                      |
+| *CHINA*                                  |                                           |
+| COMOROS                                  | COMOROS                                   |
+| CONGO                                    | CONGO                                     |
+|                                          | *COTE D'IVOIRE*                           |
+| *CUBA*                                   |                                           |
+| *DEMOCRATIC PEOPLE'S REPUBLIC OF KOREA*  |                                           |
+| DEMOCRATIC REPUBLIC OF THE CONGO         | DEMOCRATIC REPUBLIC OF THE CONGO          |
+| *DJIBOUTI*                               |                                           |
+| DOMINICA                                 | DOMINICA                                  |
+| *ECUADOR*                                |                                           |
+| *EGYPT*                                  |                                           |
+|                                          | *EL SALVADOR*                             |
+| EQUATORIAL GUINEA                        | EQUATORIAL GUINEA                         |
+| *ERITREA*                                |                                           |
+| *ETHIOPIA*                               |                                           |
+|                                          | *FIJI*                                    |
+| GABON                                    | GABON                                     |
+| GAMBIA                                   | GAMBIA                                    |
+|                                          | *GHANA*                                   |
+|                                          | *GRENADA*                                 |
+|                                          | *GUATEMALA*                               |
+| *GUINEA*                                 |                                           |
+|                                          | *GUINEA-BISSAU*                           |
+| *GUYANA*                                 |                                           |
+|                                          | *HAITI*                                   |
+|                                          | *HONDURAS*                                |
+| *INDIA*                                  |                                           |
+| *INDONESIA*                              |                                           |
+| *IRAN (ISLAMIC REPUBLIC OF)*             |                                           |
+| *IRAQ*                                   |                                           |
+| *JORDAN*                                 |                                           |
+| KENYA                                    | KENYA                                     |
+|                                          | *KIRIBATI*                                |
+| *KUWAIT*                                 |                                           |
+| *KYRGYZSTAN*                             |                                           |
+| *LAOS*                                   |                                           |
+| *LEBANON*                                |                                           |
+|                                          | *LESOTHO*                                 |
+|                                          | *LIBERIA*                                 |
+| *LIBYA*                                  |                                           |
+|                                          | *MADAGASCAR*                              |
+|                                          | *MALAWI*                                  |
+| *MALAYSIA*                               |                                           |
+| *MALDIVES*                               |                                           |
+| *MALI*                                   |                                           |
+| *MAURITANIA*                             |                                           |
+| *MAURITIUS*                              |                                           |
+| *MOROCCO*                                |                                           |
+| *MOZAMBIQUE*                             |                                           |
+| MYANMAR                                  | MYANMAR                                   |
+| *NAMIBIA*                                |                                           |
+|                                          | *NAURU*                                   |
+| *NEPAL*                                  |                                           |
+| *NICARAGUA*                              |                                           |
+| NIGER                                    | NIGER                                     |
+| NIGERIA                                  | NIGERIA                                   |
+| *OMAN*                                   |                                           |
+| *PAKISTAN*                               |                                           |
+|                                          | *PANAMA*                                  |
+|                                          | *PAPUA NEW GUINEA*                        |
+|                                          | *PARAGUAY*                                |
+| *QATAR*                                  |                                           |
+|                                          | *RWANDA*                                  |
+|                                          | *SAINT KITTS AND NEVIS*                   |
+|                                          | *SAINT LUCIA*                             |
+| SAINT VINCENT AND THE GRENADINES         | SAINT VINCENT AND THE GRENADINES          |
+|                                          | *SAO TOME AND PRINCIPE*                   |
+| *SAUDI ARABIA*                           |                                           |
+| *SENEGAL*                                |                                           |
+|                                          | *SEYCHELLES*                              |
+| SIERRA LEONE                             | SIERRA LEONE                              |
+| *SINGAPORE*                              |                                           |
+|                                          | *SOLOMON ISLANDS*                         |
+| SOMALIA                                  | SOMALIA                                   |
+| *SOUTH AFRICA*                           |                                           |
+| *SRI LANKA*                              |                                           |
+| *SUDAN*                                  |                                           |
+| SURINAME                                 | SURINAME                                  |
+|                                          | *ESWATINI*                                |
+| *SYRIA*                                  |                                           |
+| *TAJIKISTAN*                             |                                           |
+|                                          | *TIMOR-LESTE*                             |
+|                                          | *TOGO*                                    |
+|                                          | *TONGA*                                   |
+|                                          | *TRINIDAD AND TOBAGO*                     |
+| *TUNISIA*                                |                                           |
+| *TURKMENISTAN*                           |                                           |
+|                                          | *TUVALU*                                  |
+| UGANDA                                   | UGANDA                                    |
+| *UNITED ARAB EMIRATES*                   |                                           |
+| UNITED REPUBLIC OF TANZANIA              | UNITED REPUBLIC OF TANZANIA               |
+| *UZBEKISTAN*                             |                                           |
+|                                          | *VANUATU*                                 |
+| *VENEZUELA (BOLIVARIAN REPUBLIC OF)*     |                                           |
+| *VIET NAM*                               |                                           |
+| *YEMEN*                                  |                                           |
+|                                          | *ZAMBIA*                                  |
+| *ZIMBABWE*                               |                                           |
+|                                          | *SOUTH SUDAN*                             |
+|------------------------------------------+-------------------------------------------|
+| Community 2                              |                                           |
+|------------------------------------------+-------------------------------------------|
+|                                          | *AFGHANISTAN*                             |
+| *ALBANIA*                                |                                           |
+|                                          | *ALGERIA*                                 |
+| *ANDORRA*                                |                                           |
+|                                          | *ANGOLA*                                  |
+| *AUSTRALIA*                              |                                           |
+| *AUSTRIA*                                |                                           |
+|                                          | *AZERBAIJAN*                              |
+|                                          | *BAHRAIN*                                 |
+|                                          | *BANGLADESH*                              |
+|                                          | *BELARUS*                                 |
+| *BELGIUM*                                |                                           |
+|                                          | *BOLIVIA*                                 |
+| *BOSNIA AND HERZEGOVINA*                 |                                           |
+|                                          | *BRUNEI DARUSSALAM*                       |
+| *BULGARIA*                               |                                           |
+|                                          | *CAMBODIA*                                |
+| *CANADA*                                 |                                           |
+|                                          | *CHINA*                                   |
+| *COSTA RICA*                             |                                           |
+| *CROATIA*                                |                                           |
+|                                          | *CUBA*                                    |
+| *CYPRUS*                                 |                                           |
+| *CZECH REPUBLIC*                         |                                           |
+|                                          | *DEMOCRATIC PEOPLE'S REPUBLIC OF KOREA*   |
+| *DENMARK*                                |                                           |
+|                                          | *DJIBOUTI*                                |
+|                                          | *ECUADOR*                                 |
+|                                          | *EGYPT*                                   |
+|                                          | *ERITREA*                                 |
+| *ESTONIA*                                |                                           |
+|                                          | *ETHIOPIA*                                |
+| *FINLAND*                                |                                           |
+| *FRANCE*                                 |                                           |
+| *GEORGIA*                                |                                           |
+| *GERMANY*                                |                                           |
+| *GREECE*                                 |                                           |
+|                                          | *GUINEA*                                  |
+|                                          | *GUYANA*                                  |
+| *HUNGARY*                                |                                           |
+| *ICELAND*                                |                                           |
+|                                          | *INDIA*                                   |
+|                                          | *INDONESIA*                               |
+|                                          | *IRAN (ISLAMIC REPUBLIC OF)*              |
+|                                          | *IRAQ*                                    |
+| *IRELAND*                                |                                           |
+| *ISRAEL*                                 |                                           |
+| *ITALY*                                  |                                           |
+| *JAPAN*                                  |                                           |
+|                                          | *JORDAN*                                  |
+|                                          | *KAZAKHSTAN*                              |
+|                                          | *KUWAIT*                                  |
+|                                          | *KYRGYZSTAN*                              |
+|                                          | *LAOS*                                    |
+| *LATVIA*                                 |                                           |
+|                                          | *LEBANON*                                 |
+|                                          | *LIBYA*                                   |
+| *LIECHTENSTEIN*                          |                                           |
+| *LITHUANIA*                              |                                           |
+| *LUXEMBOURG*                             |                                           |
+|                                          | *MALAYSIA*                                |
+|                                          | *MALDIVES*                                |
+|                                          | *MALI*                                    |
+| *MALTA*                                  |                                           |
+| *MARSHALL ISLANDS*                       |                                           |
+|                                          | *MAURITANIA*                              |
+|                                          | *MAURITIUS*                               |
+| *MICRONESIA (FEDERATED STATES OF)*       |                                           |
+| *MONACO*                                 |                                           |
+| *MONTENEGRO*                             |                                           |
+|                                          | *MOROCCO*                                 |
+|                                          | *MOZAMBIQUE*                              |
+|                                          | *NAMIBIA*                                 |
+|                                          | *NEPAL*                                   |
+| *NETHERLANDS*                            |                                           |
+| *NEW ZEALAND*                            |                                           |
+|                                          | *NICARAGUA*                               |
+| *NORWAY*                                 |                                           |
+|                                          | *OMAN*                                    |
+|                                          | *PAKISTAN*                                |
+| *PALAU*                                  |                                           |
+| *POLAND*                                 |                                           |
+| *PORTUGAL*                               |                                           |
+|                                          | *QATAR*                                   |
+| *REPUBLIC OF KOREA*                      |                                           |
+| *REPUBLIC OF MOLDOVA*                    |                                           |
+| *ROMANIA*                                |                                           |
+| *SAMOA*                                  |                                           |
+| *SAN MARINO*                             |                                           |
+|                                          | *SAUDI ARABIA*                            |
+|                                          | *SENEGAL*                                 |
+| *SERBIA*                                 |                                           |
+|                                          | *SINGAPORE*                               |
+| *SLOVAKIA*                               |                                           |
+| *SLOVENIA*                               |                                           |
+|                                          | *SOUTH AFRICA*                            |
+| *SPAIN*                                  |                                           |
+|                                          | *SRI LANKA*                               |
+|                                          | *SUDAN*                                   |
+| *SWEDEN*                                 |                                           |
+| *SWITZERLAND*                            |                                           |
+|                                          | *SYRIA*                                   |
+|                                          | *TAJIKISTAN*                              |
+| *NORTH MACEDONIA*                        |                                           |
+|                                          | *TUNISIA*                                 |
+| *TURKEY*                                 |                                           |
+|                                          | *TURKMENISTAN*                            |
+| *UKRAINE*                                |                                           |
+|                                          | *UNITED ARAB EMIRATES*                    |
+| *UNITED KINGDOM*                         |                                           |
+| *UNITED STATES*                          |                                           |
+|                                          | *UZBEKISTAN*                              |
+|                                          | *VENEZUELA (BOLIVARIAN REPUBLIC OF)*      |
+|                                          | *VIET NAM*                                |
+|                                          | *YEMEN*                                   |
+|                                          | *ZIMBABWE*                                |
+|------------------------------------------+-------------------------------------------|
+| Community 3                              |                                           |
+|------------------------------------------+-------------------------------------------|
+|                                          | *ALBANIA*                                 |
+|                                          | *ANDORRA*                                 |
+| *ANTIGUA AND BARBUDA*                    |                                           |
+|                                          | *AUSTRALIA*                               |
+|                                          | *AUSTRIA*                                 |
+| *BAHAMAS*                                |                                           |
+| *BARBADOS*                               |                                           |
+|                                          | *BELGIUM*                                 |
+| *BELIZE*                                 |                                           |
+| *BENIN*                                  |                                           |
+|                                          | *BOSNIA AND HERZEGOVINA*                  |
+| *BOTSWANA*                               |                                           |
+|                                          | *BULGARIA*                                |
+| *BURKINA FASO*                           |                                           |
+| *CAMEROON*                               |                                           |
+|                                          | *CANADA*                                  |
+| *CABO VERDE*                             |                                           |
+| *CENTRAL AFRICAN REPUBLIC*               |                                           |
+| *COLOMBIA*                               |                                           |
+|                                          | *COSTA RICA*                              |
+| *COTE D'IVOIRE*                          |                                           |
+|                                          | *CROATIA*                                 |
+|                                          | *CYPRUS*                                  |
+|                                          | *CZECH REPUBLIC*                          |
+|                                          | *DENMARK*                                 |
+| *EL SALVADOR*                            |                                           |
+|                                          | *ESTONIA*                                 |
+| *FIJI*                                   |                                           |
+|                                          | *FINLAND*                                 |
+|                                          | *FRANCE*                                  |
+|                                          | *GEORGIA*                                 |
+|                                          | *GERMANY*                                 |
+| *GHANA*                                  |                                           |
+|                                          | *GREECE*                                  |
+| *GRENADA*                                |                                           |
+| *GUATEMALA*                              |                                           |
+| *GUINEA-BISSAU*                          |                                           |
+| *HAITI*                                  |                                           |
+| *HONDURAS*                               |                                           |
+|                                          | *HUNGARY*                                 |
+|                                          | *ICELAND*                                 |
+|                                          | *IRELAND*                                 |
+|                                          | *ISRAEL*                                  |
+|                                          | *ITALY*                                   |
+|                                          | *JAPAN*                                   |
+| *KIRIBATI*                               |                                           |
+|                                          | *LATVIA*                                  |
+| *LESOTHO*                                |                                           |
+| *LIBERIA*                                |                                           |
+|                                          | *LIECHTENSTEIN*                           |
+|                                          | *LITHUANIA*                               |
+|                                          | *LUXEMBOURG*                              |
+| *MADAGASCAR*                             |                                           |
+| *MALAWI*                                 |                                           |
+|                                          | *MALTA*                                   |
+|                                          | *MARSHALL ISLANDS*                        |
+|                                          | *MICRONESIA (FEDERATED STATES OF)*        |
+|                                          | *MONACO*                                  |
+|                                          | *MONTENEGRO*                              |
+| *NAURU*                                  |                                           |
+|                                          | *NETHERLANDS*                             |
+|                                          | *NEW ZEALAND*                             |
+|                                          | *NORWAY*                                  |
+|                                          | *PALAU*                                   |
+| *PANAMA*                                 |                                           |
+| *PAPUA NEW GUINEA*                       |                                           |
+| *PARAGUAY*                               |                                           |
+|                                          | *POLAND*                                  |
+|                                          | *PORTUGAL*                                |
+|                                          | *REPUBLIC OF KOREA*                       |
+|                                          | *REPUBLIC OF MOLDOVA*                     |
+|                                          | *ROMANIA*                                 |
+| *RWANDA*                                 |                                           |
+| *SAINT KITTS AND NEVIS*                  |                                           |
+| *SAINT LUCIA*                            |                                           |
+|                                          | *SAMOA*                                   |
+|                                          | *SAN MARINO*                              |
+| *SAO TOME AND PRINCIPE*                  |                                           |
+|                                          | *SERBIA*                                  |
+| *SEYCHELLES*                             |                                           |
+|                                          | *SLOVAKIA*                                |
+|                                          | *SLOVENIA*                                |
+| *SOLOMON ISLANDS*                        |                                           |
+|                                          | *SPAIN*                                   |
+| *ESWATINI*                               |                                           |
+|                                          | *SWEDEN*                                  |
+|                                          | *SWITZERLAND*                             |
+|                                          | *NORTH MACEDONIA*                         |
+| *TIMOR-LESTE*                            |                                           |
+| *TOGO*                                   |                                           |
+| *TONGA*                                  |                                           |
+|                                          | *TURKEY*                                  |
+| *TUVALU*                                 |                                           |
+|                                          | *UKRAINE*                                 |
+|                                          | *UNITED KINGDOM*                          |
+|                                          | *UNITED STATES*                           |
+| *VANUATU*                                |                                           |
+| *ZAMBIA*                                 |                                           |
+| *SOUTH SUDAN*                            |                                           |
+|------------------------------------------+-------------------------------------------|
+| Community 4                              |                                           |
+|------------------------------------------+-------------------------------------------|
+| ARGENTINA                                | ARGENTINA                                 |
+|                                          | *BRAZIL*                                  |
+| CHILE                                    | CHILE                                     |
+|                                          | *COLOMBIA*                                |
+| DOMINICAN REPUBLIC                       | DOMINICAN REPUBLIC                        |
+| MEXICO                                   | MEXICO                                    |
+| PERU                                     | PERU                                      |
+| URUGUAY                                  | URUGUAY                                   |
+|------------------------------------------+-------------------------------------------|
+| Community 5                              |                                           |
+|------------------------------------------+-------------------------------------------|
+| *JAMAICA*                                |                                           |
+|                                          | *MONGOLIA*                                |
+| PHILIPPINES                              | PHILIPPINES                               |
+| THAILAND                                 | THAILAND                                  |
+| *TRINIDAD AND TOBAGO*                    |                                           |
+|------------------------------------------+-------------------------------------------|
+| Community 6                              |                                           |
+|------------------------------------------+-------------------------------------------|
+|                                          | *ARMENIA*                                 |
+| *BELARUS*                                |                                           |
+| *MONGOLIA*                               |                                           |
+| RUSSIAN FEDERATION                       | RUSSIAN FEDERATION                        |
+|------------------------------------------+-------------------------------------------|
+| Community 7                              |                                           |
+|------------------------------------------+-------------------------------------------|
+| *ARMENIA*                                |                                           |
+|                                          | *JAMAICA*                                 |
+| *KAZAKHSTAN*                             |                                           |
+
+One may immediately observe that most of the reshuffling present here is
+caused by mix-up in communities 1,2 and 3, albeit in my opinion the fact
+that in processed graph we can correctly identify the Russia-Belarus
+block makes the few kilowatt-hours spent detecting it justified.
+
+[[./images/modern_filter_5_2.png]] [[./images/modern_raw_2.png]]
