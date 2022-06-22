@@ -120,22 +120,24 @@ def spell_community_difference(G, Graw, res, country_list):
         min = len(c_raw)
         max = len(c)
     for j in range(min):
-        print("| Community {} |".format(j + 1))
-        print("----------------")
+        print("|Community {0:>30}|".format(j + 1))
+        print("------------------------------------------------------------------------------------")
         for i in range(len(country_list)):
+            bold_str = "*{}*".format(country_list[i])
             if i in c_raw[j] and str(i) in c[j]:
-                print("| {} | {} |".format(country_list[i],country_list[i]))
+                print("|{0:>40}|{1:>41}|".format(country_list[i],country_list[i]))
             elif i in c_raw[j]:
-                print("| _ | *{}* |".format(country_list[i]))
+                print("|                                        |{0:41}|".format(bold_str))
             elif str(i) in c[j]:
-                print("| *{}* | _ |".format(country_list[i]))
+                print("|{0:>40}|                                         |".format(bold_str))
     for j in range(min,max):
-        print("| Community {} |".format(j + 1))
-        print("----------------")
+        print("|Community {0:>30}|".format(comm_str))
+        print("------------------------------------------------------------------------------------")
         for i in range(len(country_list)):
+            bold_str = "*{}*".format(country_list[i])
             if min == len(c):
                 if i in c_raw[j]:
-                    print("| _ | *{}* |".format(country_list[i]))
+                    print("|                                        |{0:>40}|".format(bold_str))
             else:
                 if str(i) in c[j]:
-                    print("| *{}* | _  |".format(country_list[i]))
+                    print("|{0:>40}|                                         |".format(bold_str))

@@ -18,7 +18,7 @@ votinggraph -- the module that ties above together to provide straightforward me
 
 # Additional information
 
-See docs/results.md
+See docs/results.md on overall results of the research
 
 # Creators
 

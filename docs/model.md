@@ -10,7 +10,7 @@ $$
 \mathcal F = \sigma \ln \left[\frac{1}{|V|}\sum_{u\in V} E(u,v) e^{p_u \cdot p_v}\right]
 $$
 
-Where $\forall u\in V$ it holds that $\sum_i p_u(i) = 1$ and $E(u,v)$ reflects covariance between voting records accurately, namely the greater it is, the more correlated voting records are. Using the covariance itself works fine in this context.
+Where $\forall u\in V$ it holds that $\sum_{i} p_u(i) = 1$ and $E(u,v)$ reflects covariance between voting records accurately, namely the greater it is, the more correlated voting records are. Using the covariance itself works fine in this context.
 
 # Optimization
 
