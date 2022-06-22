@@ -95,10 +95,24 @@ def scrub_un_docs (from_year = 2007, until_year = 2023):
             backup.close()
         soup = BS(pagetext,'html.parser')
         voting_record = soup.find_all('span',class_='value col-xs-12 col-sm-9 col-md-10')
+        metadata = soup.find_all('span',class_='title col-xs-12 col-sm-3 col-md-2')
         record_len = len(voting_record)
+        meta_len = len(metadata)
         votes = voting_record[record_len - 2].stripped_strings
+        vote_title = metadata[meta_len - 2].string
+        if vote_title == "Vote date":
+            continue
         for vote in votes:
-            if vote[1] == ' ':
+            if vote[2] == ' ' and vote[:2] != "EL":
+                print(record_url, vote)
+                country = vote[3:]
+                print(country)
+
+                if country not in countries_votes:
+                    countries_votes[country] = (record_cnt * ('E')) + vote[0]
+                else:
+                    countries_votes[country] += vote[0]
+            elif vote[1] == ' ':
                 country = vote[2:]
                 # A bunch of hardcoding the political exceptions
                 if country[:7] == "BOLIVIA":
@@ -113,6 +127,37 @@ def scrub_un_docs (from_year = 2007, until_year = 2023):
                     country = "LIBYA"
                 elif country[:7] == "CZECHIA":
                     country = "CZECH REPUBLIC"
+                elif country == "CENTRAL AFRICAN EMPIRE":
+                    country = "CENTRAL AFRICAN REPUBLIC"
+                elif country == "UNITED ARAB REPUBLIC":
+                    country = "EGYPT"
+                elif country == "DEMOCRATIC KAMPUCHEA":
+                    country = "CAMBODIA"
+                elif country == "CEYLON":
+                    country = "SRI LANKA"
+                elif country == "CONGO (LEOPOLDVILLE)":
+                    country = "CONGO (DEMOCRATIC REPUBLIC OF)"
+                elif country == "CONGO (BRAZZAVILLE)":
+                    country = "CONGO"
+                elif country[:3] == "LAO":
+                    country = "LAOS"
+                elif country == "DAHOMEY":
+                    country = "BERIN"
+                elif country[:8] == "MALDIVES":
+                    country = "MALDIVES"
+                elif country == "KHMER REPUBLIC":
+                    country = "CAMBODIA"
+                elif country == "DEMOCRATIC YEMEN":
+                    country = "SOUTHERN YEMEN"
+                elif country[:5] == "SYRIA":
+                    country = "SYRIA"
+                elif country == "ZAIRE":
+                    country = "CONGO (DEMOCRATIC REPUBLIC OF)"
+                elif country == "UNITED REPUBLIC OF CAMEROON":
+                    country = "CAMEROON"
+                elif country == "SURINAM":
+                    country = "SURINAME"
+                
                                                                                 
                 if country not in countries_votes:
                     countries_votes[country] = (record_cnt * ('E')) + vote[0]
@@ -132,7 +177,36 @@ def scrub_un_docs (from_year = 2007, until_year = 2023):
                     country = "LIBYA"
                 elif country[:7] == "CZECHIA":
                     country = "CZECH REPUBLIC"
-
+                elif country == "CENTRAL AFRICAN EMPIRE":
+                    country = "CENTRAL AFRICAN REPUBLIC"
+                elif country == "UNITED ARAB REPUBLIC":
+                    country = "EGYPT"
+                elif country == "DEMOCRATIC KAMPUCHEA":
+                    country = "CAMBODIA"
+                elif country == "CEYLON":
+                    country = "SRI LANKA"
+                elif country == "CONGO (LEOPOLDVILLE)":
+                    country = "CONGO (DEMOCRATIC REPUBLIC OF)"
+                elif country == "CONGO (BRAZZAVILLE)":
+                    country = "CONGO"
+                elif country[:3] == "LAO":
+                    country = "LAOS"
+                elif country == "DAHOMEY":
+                    country = "BERIN"
+                elif country[:8] == "MALDIVES":
+                    country = "MALDIVES"
+                elif country == "KHMER REPUBLIC":
+                    country = "CAMBODIA"
+                elif country == "DEMOCRATIC YEMEN":
+                    country = "SOUTHERN YEMEN"
+                elif country[:5] == "SYRIA":
+                    country = "SYRIA"
+                elif country == "ZAIRE":
+                    country = "CONGO (DEMOCRATIC REPUBLIC OF)"
+                elif country == "UNITED REPUBLIC OF CAMEROON":
+                    country = "CAMEROON"
+                elif country == "SURINAM":
+                    country = "SURINAME"
                                                                                     
                 if country not in countries_votes:
                     countries_votes[country] = (record_cnt * ('E')) + 'E'
@@ -153,16 +227,18 @@ def scrub_un_docs (from_year = 2007, until_year = 2023):
     country_list = list()
                                                                                                     
     for country in countries_votes:
-        country_list.append(country)
         for i in range(record_cnt):
             if countries_votes[country][i] == 'Y':
                 vote_matrix[country_cnt][i] = 1
             if countries_votes[country][i] == 'N':
                 vote_matrix[country_cnt][i] = -1
-        country_cnt += 1
+        print("{} had voted {} times".format(country, np.linalg.norm(vote_matrix[country_cnt])))
+        if np.linalg.norm(vote_matrix[country_cnt],1) != 0:
+            country_list.append(country)
+            country_cnt += 1
+        else:
+            vote_matrix = np.delete(vote_matrix,country_cnt,0)
 
     return vote_matrix, country_list
                 
 # That's the scrapping done
-    
-    
