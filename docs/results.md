@@ -203,7 +203,11 @@ After choosing a resolution of 1.55 for the algorithm we get the following diver
 | ----------------|
 | || *LAOS*| || _| ||
 
-These results might be fairly straightforward because this period is characterized by fairly rigid political structure of the world, freed colonies and other places buried in civil wars notwithstanding. Albeit, our approach does allow one to reshuffle communities, the notable of which is separation of Malysia, 
+These results might be fairly straightforward because this period is characterized by fairly rigid political structure of the world, freed colonies and other places buried in civil wars notwithstanding. Albeit, our approach does allow one to reshuffle communities, the notable of which is separation of Malysia from Indonesia.
+
+![The processed view of the graph](./images/coldwar_filter_5_1.png "Filtered graph")
+
+![Image of the raw graph](./images/coldwar_raw_1.png "Raw graph")
 
 ## Modern period
 
@@ -588,3 +592,6 @@ At last, using the similar strategy and applying it to modern period data (resol
 
 
 One may immediately observe that  most of the reshuffling present here is caused by mix-up in communities 1,2 and 3, albeit in my opinion the fact that in processed graph we can correctly identify the Russia-Belarus block makes the few kilowatt-hours spent detecting it justified.
+
+![Image of the processed graph](./images/modern_filter_5_2.png "Filtered graph")
+![Image of the raw graph](./images/modern_raw_2.png "Original graph")
