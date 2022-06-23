@@ -219,6 +219,14 @@ following divergence in communities in Cold War.
 |------------------------------------------+--------------------------------|
 | *CAMEROON*                               |                                |
 | GHANA                                    | GHANA                          |
+|------------------------------------------+--------------------------------|
+| Community                             10 |                                |
+|------------------------------------------+--------------------------------|
+| *LAOS*                                   |                                |
+|------------------------------------------+--------------------------------|
+| Community                             11 |                                |
+|------------------------------------------+--------------------------------|
+| *INDONESIA*                              |                                |
 
 These results might be fairly straightforward because this period is
 characterized by fairly rigid political structure of the world, freed

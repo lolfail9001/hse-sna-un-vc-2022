@@ -131,7 +131,7 @@ def spell_community_difference(G, Graw, res, country_list):
             elif str(i) in c[j]:
                 print("|{0:>40}|                                         |".format(bold_str))
     for j in range(min,max):
-        print("|Community {0:>30}|".format(comm_str))
+        print("|Community {0:>30}|".format(j + 1))
         print("------------------------------------------------------------------------------------")
         for i in range(len(country_list)):
             bold_str = "*{}*".format(country_list[i])
